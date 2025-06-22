@@ -4,7 +4,7 @@ const prisma = new PrismaClient();
 async function main() {
   const oatmeal = await prisma.breakfast.create({
     data: {
-      name: "Oatmeal",
+      name: "Cereal",
       meals: {
         create: [
           {
@@ -38,7 +38,9 @@ async function main() {
                 { name: "Apple Cinnamon" },
               ]
             }
-          }
+          },
+          { name: "Cereal" },
+          { name: "Yogurt and Granola" },
         ],
       },
     },
@@ -81,10 +83,18 @@ async function main() {
       name: "Traditional",
       meals: {
         create: [
-          { name: "Eggs and Bacon" },
-          { name: "Eggs and Sausage" },
-          { name: "Eggs and Hashbrowns" },
+          { 
+            name: "Eggs",
+            combos: {
+              create: [
+                { name: "And Bacon" },
+                { name: "And Sausage" },
+                { name: "And Hashbrowns" },
+              ]
+            }
+          },
           { name: "Pancakes" },
+          { name: "Waffles" },
           {
             name: "Omelette",
             combos: {
@@ -97,6 +107,21 @@ async function main() {
               ]
             }
           }
+        ]
+      }
+    }
+  });
+
+  const smoothies = await prisma.breakfast.create({
+    data: {
+      name: "Smoothies",
+      meals: {
+        create: [
+          { name: "Peanut Butter Banana" },
+          { name: "Strawberry Banana" },
+          { name: "Blueberry Peanut Butter" },
+          { name: "Kale Pineapple" },
+          { name: "Protein Combo" },
         ]
       }
     }
